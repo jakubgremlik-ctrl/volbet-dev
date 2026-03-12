@@ -1,0 +1,191 @@
+---
+/**
+ * Input Component
+ * 
+ * Flexible text input field with label, validation states, and error messages.
+ * 
+ * @component
+ * @example
+ * <Input label="Email" name="email" type="email" required />
+ * <Input label="Company" name="company" error="This field is required" />
+ * <Input label="Phone" name="phone" type="tel" />
+ */
+
+export interface Props {
+  /**
+   * Label text displayed above the input
+   */
+  label?: string;
+  
+  /**
+   * Name attribute for the input field
+   */
+  name: string;
+  
+  /**
+   * Input type (text, email, tel, number, etc.)
+   */
+  type?: 'text' | 'email' | 'tel' | 'number' | 'password' | 'url' | 'date';
+  
+  /**
+   * Placeholder text
+   */
+  placeholder?: string;
+  
+  /**
+   * Whether the field is required
+   */
+  required?: boolean;
+  
+  /**
+   * Error message to display (shows error state when present)
+   */
+  error?: string;
+  
+  /**
+   * Helper text displayed below the label
+   */
+  help?: string;
+  
+  /**
+   * Default value
+   */
+  value?: string;
+  
+  /**
+   * Disabled state
+   */
+  disabled?: boolean;
+  
+  /**
+   * Additional CSS classes
+   */
+  class?: string;
+}
+
+const {
+  label,
+  name,
+  type = 'text',
+  placeholder = '',
+  required = false,
+  error,
+  help,
+  value = '',
+  disabled = false,
+  class: additionalClasses = '',
+} = Astro.props;
+
+// Design system colors
+const navyBlue = '#1A2332';
+const mediumGray = '#475569';
+const orangeColor = '#D97706';
+const errorRed = '#DC2626';
+const lightGray = '#F8FAFC';
+const borderGray = '#E2E8F0';
+
+const hasError = !!error;
+const inputId = `input-${name}`;
+---
+
+<div class={`input-wrapper ${additionalClasses}`.trim()}>
+  {label && (
+    <label 
+      for={inputId}
+      class="block text-sm font-semibold mb-2"
+      style={`color: ${navyBlue}`}
+    >
+      {label}
+      {required && <span style={`color: ${errorRed}`}>*</span>}
+    </label>
+  )}
+  
+  {help && !hasError && (
+    <p class="text-xs mb-2" style={`color: ${mediumGray}`}>
+      {help}
+    </p>
+  )}
+  
+  <input
+    id={inputId}
+    name={name}
+    type={type}
+    placeholder={placeholder}
+    required={required}
+    disabled={disabled}
+    value={value}
+    class={`input-field ${hasError ? 'input-error' : ''} ${disabled ? 'input-disabled' : ''}`}
+    style={`
+      border-color: ${hasError ? errorRed : borderGray};
+      color: ${navyBlue};
+    `}
+  />
+  
+  {error && (
+    <p class="text-xs mt-2" style={`color: ${errorRed}`}>
+      {error}
+    </p>
+  )}
+</div>
+
+<style define:vars={{
+  navyBlue,
+  mediumGray,
+  orangeColor,
+  errorRed,
+  lightGray,
+  borderGray
+}}>
+  .input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border: 1px solid;
+    border-radius: 0.375rem;
+    background-color: white;
+    transition: all 0.2s ease-in-out;
+    font-family: inherit;
+  }
+  
+  .input-field:focus {
+    outline: none;
+    border-color: var(--orangeColor);
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+  }
+  
+  .input-field:hover:not(:disabled) {
+    border-color: #cbd5e1;
+  }
+  
+  .input-field.input-error {
+    border-color: var(--errorRed);
+    background-color: rgba(220, 38, 38, 0.05);
+  }
+  
+  .input-field.input-error:focus {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+    border-color: var(--errorRed);
+  }
+  
+  .input-field.input-disabled {
+    background-color: var(--lightGray);
+    color: #9ca3af;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  .input-field.input-disabled:hover {
+    border-color: var(--borderGray);
+  }
+  
+  label {
+    display: block;
+  }
+</style>

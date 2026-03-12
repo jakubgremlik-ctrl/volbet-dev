@@ -1,0 +1,998 @@
+---
+// VOLBET.PL Homepage — Astro 5
+// Production-ready implementation following wireframes + design system
+
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
+import Footer from '../components/Footer.astro';
+
+// SEO Meta Tags
+const title = 'Spoiwa Mineralne i Torkretowanie dla Kopalń | VOLBET';
+const description = 'Profesjonalne rozwiązania dla górnictwa i budownictwa podziemnego. Spoiwa mineralne, torkretowanie, termoizolacja wyrobisk. ✓ 20+ lat doświadczenia';
+const keywords = 'spoiwa mineralne górnicze, torkretowanie wyrobisk, termoizolacja kopalń, budownictwo podziemne, materiały górnicze';
+
+// Navigation links
+const navLinks = [
+  { label: 'Oferta', href: '/oferta' },
+  { label: 'Realizacje', href: '/realizacje' },
+  { label: 'O nas', href: '/o-nas' },
+  { label: 'Kontakt', href: '/kontakt' },
+];
+
+// Services data for grid
+const services = [
+  {
+    id: 'spoiwa-mineralne',
+    title: 'Spoiwa Mineralne',
+    description: 'Spoiwa cementowo-mineralne i anhydrytowe do budowy tam i zabezpieczeń wyrobisk górniczych.',
+    icon: '🏗️',
+    link: '/oferta/spoiwa-mineralne',
+  },
+  {
+    id: 'torkretowanie',
+    title: 'Torkretowanie',
+    description: 'Torkret termoizolacyjny i konstrukcyjny dla wyrobisk górniczych — metoda sucha i mokra.',
+    icon: '💨',
+    link: '/oferta/torkretowanie',
+  },
+  {
+    id: 'termoizolacja',
+    title: 'Termoizolacja',
+    description: 'Systemy termoizolacji wyrobisk korytarzowych i pionowych — optymalizacja temperatury.',
+    icon: '🌡️',
+    link: '/oferta/termoizolacja',
+  },
+  {
+    id: 'piany-poliuretanowe',
+    title: 'Piany Poliuretanowe',
+    description: 'Piany PUR do uszczelniania i izolacji wyrobisk — nowoczesne rozwiązania techniczne.',
+    icon: '🧪',
+    link: '/oferta/piany-poliuretanowe',
+  },
+  {
+    id: 'mieszanki-zbrojone',
+    title: 'Mieszanki Zbrojone',
+    description: 'Mieszanki zbrojone włóknem do wzmacniania górotworu — innowacyjne podejście.',
+    icon: '⚙️',
+    link: '/oferta/mieszanki-zbrojone',
+  },
+  {
+    id: 'budownictwo-geotechniczne',
+    title: 'Budownictwo Geotechniczne',
+    description: 'Kompleksowe rozwiązania geotechniczne dla infrastruktury podziemnej — kompleksowo.',
+    icon: '🏔️',
+    link: '/oferta/budownictwo-geotechniczne',
+  },
+];
+
+// Stats for social proof
+const stats = [
+  {
+    number: '20+',
+    label: 'Lat na rynku',
+    icon: '📅',
+  },
+  {
+    number: '500+',
+    label: 'Projektów w całej Polsce',
+    icon: '✓',
+  },
+  {
+    number: '100%',
+    label: 'Satysfakcja klientów',
+    icon: '⭐',
+  },
+];
+
+// Featured case studies
+const featuredProjects = [
+  {
+    title: 'Zabezpieczenie wyrobiska górniczego',
+    category: 'Torkretowanie',
+    client: 'Kopalnia Węgla Kamiennego',
+    description: 'Kompleksowe torkretowanie wyrobiska o długości 500m metodą mokrą z termoizolacją.',
+    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop',
+  },
+  {
+    title: 'System tam izolacyjnych',
+    category: 'Spoiwa Mineralne',
+    client: 'Kopalnia Rudy Miedzi',
+    description: 'Zastosowanie spoiw mineralnych do budowy tam izolacyjnych — projekt o dużej skali.',
+    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop',
+  },
+  {
+    title: 'Termoizolacja wyrobiska pionowego',
+    category: 'Termoizolacja',
+    client: 'Kopalnia Soli',
+    description: 'Wdrożenie systemu termoizolacji w wyrobiskach pionowych — efektywność energetyczna.',
+    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop',
+  },
+];
+
+// Design system colors
+const navyBlue = '#1A2332';
+const orange = '#D97706';
+const lightGray = '#F8FAFC';
+const mediumGray = '#475569';
+const white = '#FFFFFF';
+---
+
+<Layout title={title} description={description}>
+  <Navigation
+    companyName="VOLBET"
+    links={navLinks}
+    sticky={true}
+  />
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" style={`background: linear-gradient(135deg, #1E3A8A 0%, #1A2332 100%);`}>
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1 style={`color: ${white};`}>
+            Profesjonalne rozwiązania dla górnictwa i budownictwa podziemnego
+          </h1>
+          
+          <p class="hero-subheadline" style={`color: #E5E7EB;`}>
+            Dostarczamy spoiwa mineralne, torkretowanie i systemy termoizolacji dla kopalń w całej Polsce. Bezpieczeństwo, jakość, doświadczenie.
+          </p>
+          
+          <div class="hero-ctas">
+            <Button variant="primary" href="/oferta" size="large">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+              Zobacz naszą ofertę
+            </Button>
+            
+            <Button variant="secondary" href="/kontakt" size="large">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 00.948-.684l1.498-4.493a1 1 0 011.502-.684l1.498 4.493a1 1 0 00.948.684H17a2 2 0 012 2v2a1 1 0 001 1h1a2 2 0 012 2v1a1 1 0 01-1 1H3.97a1 1 0 01-1-1V5a1 1 0 011-1zm0 0a2 2 0 012-2h.5a1 1 0 01.707.293l.146.147a1 1 0 01.207.466l.528 1.318A1 1 0 018.5 5h7a1 1 0 01.894.553l.528-1.318a1 1 0 01.207-.466l.146-.147A1 1 0 0117.5 3H18a2 2 0 012 2" />
+              </svg>
+              Skontaktuj się z ekspertem
+            </Button>
+          </div>
+          
+          <!-- Trust badges -->
+          <div class="trust-badges" style={`color: ${white};`}>
+            <div class="trust-badge">
+              <span class="trust-icon">🔐</span>
+              <span>ISO Certyfikacja</span>
+            </div>
+            <div class="trust-badge">
+              <span class="trust-icon">📅</span>
+              <span>20+ lat doświadczenia</span>
+            </div>
+            <div class="trust-badge">
+              <span class="trust-icon">✓</span>
+              <span>500+ projektów</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="hero-visual">
+          <img 
+            src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1200&h=800&fit=crop"
+            alt="Górnicy pracujący w podziemnym wyrobiskach"
+            loading="eager"
+            decoding="async"
+            class="hero-image"
+          />
+          <div class="hero-overlay"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES GRID SECTION -->
+    <section class="services-section" style={`background: ${white};`}>
+      <div class="section-container">
+        <h2 class="section-heading" style={`color: ${navyBlue};`}>
+          Nasze usługi dla górnictwa
+        </h2>
+        
+        <div class="services-grid">
+          {services.map((service) => (
+            <Card
+              variant="service"
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
+              link={service.link}
+              linkText="Dowiedz się więcej"
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL PROOF / STATS SECTION -->
+    <section class="stats-section" style={`background: ${lightGray};`}>
+      <div class="section-container">
+        <h2 class="section-heading text-center" style={`color: ${navyBlue};`}>
+          Zaufali nam liderzy branży górniczej
+        </h2>
+        
+        <div class="stats-grid">
+          {stats.map((stat) => (
+            <div class="stat-block">
+              <div class="stat-icon">{stat.icon}</div>
+              <div class="stat-number" style={`color: ${orange};`}>
+                {stat.number}
+              </div>
+              <div class="stat-label" style={`color: ${mediumGray};`}>
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT TEASER SECTION -->
+    <section class="about-section" style={`background: ${white};`}>
+      <div class="section-container">
+        <div class="about-grid">
+          <div class="about-content">
+            <h2 style={`color: ${navyBlue};`}>
+              Kim jesteśmy?
+            </h2>
+            
+            <p style={`color: ${mediumGray};`}>
+              VOLBET Sp. z o.o. to wiodący dostawca materiałów i usług dla górnictwa oraz budownictwa podziemnego w Polsce. Od ponad 20 lat zapewniamy kompleksowe rozwiązania w zakresie spoiw mineralnych, torkretowania i termoizolacji wyrobisk górniczych.
+            </p>
+            
+            <p style={`color: ${mediumGray};`}>
+              Nasi specjaliści łączą wiedzę techniczną z praktycznym doświadczeniem, gwarantując najwyższe standardy bezpieczeństwa i jakości. Współpracujemy z największymi kopalniami w Polsce, dostarczając produkty certyfikowane i zgodne z normami branżowymi.
+            </p>
+            
+            <Button variant="secondary" href="/o-nas" size="large" class="mt-8">
+              Poznaj naszą historię
+            </Button>
+          </div>
+          
+          <div class="about-image">
+            <img 
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=600&fit=crop"
+              alt="Zespół VOLBET — eksperci w dziedzinie górnictwa"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE STUDIES TEASER SECTION -->
+    <section class="case-studies-section" style={`background: ${white};`}>
+      <div class="section-container">
+        <h2 class="section-heading text-center" style={`color: ${navyBlue};`}>
+          Nasze realizacje
+        </h2>
+        
+        <p class="section-subheading text-center" style={`color: ${mediumGray};`}>
+          Projekty, którymi się szczycimy — od tam izolacyjnych po kompleksowe zabezpieczenia wyrobisk
+        </p>
+        
+        <div class="projects-grid">
+          {featuredProjects.map((project) => (
+            <div class="project-card">
+              <div class="project-image-wrapper">
+                <img 
+                  src={project.image}
+                  alt={project.title}
+                  loading="lazy"
+                  decoding="async"
+                  class="project-image"
+                />
+                <div class="project-overlay">
+                  <span class="project-category-overlay">Zobacz więcej</span>
+                </div>
+              </div>
+              
+              <div class="project-content">
+                <span class="project-category" style={`background: ${orange};`}>
+                  {project.category}
+                </span>
+                
+                <h3 style={`color: ${navyBlue};`}>
+                  {project.title}
+                </h3>
+                
+                <p class="project-client" style={`color: ${mediumGray};`}>
+                  {project.client}
+                </p>
+                
+                <p class="project-description" style={`color: ${mediumGray};`}>
+                  {project.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="text-center mt-12">
+          <Button variant="secondary" href="/realizacje" size="large">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+            Zobacz wszystkie realizacje
+          </Button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS SECTION -->
+    <section class="certifications-section" style={`background: #EFF6FF;`}>
+      <div class="section-container">
+        <h2 class="section-heading text-center" style={`color: ${navyBlue};`}>
+          Certyfikaty i standardy jakości
+        </h2>
+        
+        <div class="certifications-grid">
+          <div class="cert-item">
+            <div class="cert-badge">📋</div>
+            <p style={`color: ${mediumGray};`}>ISO 9001</p>
+          </div>
+          <div class="cert-item">
+            <div class="cert-badge">✓</div>
+            <p style={`color: ${mediumGray};`}>20+ lat doświadczenia</p>
+          </div>
+          <div class="cert-item">
+            <div class="cert-badge">🇪🇺</div>
+            <p style={`color: ${mediumGray};`}>Normy PN/EU</p>
+          </div>
+          <div class="cert-item">
+            <div class="cert-badge">🔬</div>
+            <p style={`color: ${mediumGray};`}>Produkty certyfikowane</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT CTA SECTION -->
+    <section class="contact-cta-section" style={`background: linear-gradient(135deg, #1A2332 0%, #1E3A8A 100%);`}>
+      <div class="section-container">
+        <div class="cta-content">
+          <h2 style={`color: ${white};`}>
+            Potrzebujesz profesjonalnego rozwiązania dla Twojej kopalni?
+          </h2>
+          
+          <p class="cta-subheadline" style={`color: #E5E7EB;`}>
+            Skontaktuj się z naszym zespołem — doradzimy najlepsze rozwiązanie dla Twoich potrzeb.
+          </p>
+          
+          <div class="cta-buttons">
+            <Button variant="primary" href="/kontakt" size="large">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 00.948-.684l1.498-4.493a1 1 0 011.502-.684l1.498 4.493a1 1 0 00.948.684H17a2 2 0 012 2v2a1 1 0 001 1h1a2 2 0 012 2v1a1 1 0 01-1 1H3.97a1 1 0 01-1-1V5a1 1 0 011-1z" />
+              </svg>
+              Skontaktuj się z ekspertem
+            </Button>
+            
+            <Button variant="secondary" href="/downloads/katalog.pdf" size="large">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Pobierz katalog produktów
+            </Button>
+          </div>
+          
+          <div class="contact-info" style={`color: ${white};`}>
+            <a href="tel:+48123456789" class="contact-link">
+              📞 +48 123 456 789
+            </a>
+            <a href="mailto:kontakt@volbet.pl" class="contact-link">
+              ✉️ kontakt@volbet.pl
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer
+    companyName="VOLBET Sp. z o.o."
+    tagline="Profesjonalne rozwiązania dla górnictwa"
+    links={{
+      services: [
+        { label: 'Spoiwa Mineralne', href: '/oferta/spoiwa-mineralne' },
+        { label: 'Torkretowanie', href: '/oferta/torkretowanie' },
+        { label: 'Termoizolacja', href: '/oferta/termoizolacja' },
+        { label: 'Piany Poliuretanowe', href: '/oferta/piany-poliuretanowe' },
+        { label: 'Mieszanki Zbrojone', href: '/oferta/mieszanki-zbrojone' },
+        { label: 'Budownictwo Geotechniczne', href: '/oferta/budownictwo-geotechniczne' },
+      ],
+      company: [
+        { label: 'O nas', href: '/o-nas' },
+        { label: 'Realizacje', href: '/realizacje' },
+        { label: 'Certyfikaty', href: '/certyfikaty' },
+        { label: 'Kontakt', href: '/kontakt' },
+      ],
+    }}
+    contact={{
+      phone: '+48 123 456 789',
+      email: 'kontakt@volbet.pl',
+      address: 'ul. Górnicza 123, 00-000 Katowice',
+      hours: 'Pon-pt 8:00 - 16:00',
+    }}
+  />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "VOLBET Sp. z o.o.",
+    "url": "https://volbet.pl",
+    "logo": "https://volbet.pl/logo.svg",
+    "description": "Profesjonalne rozwiązania dla górnictwa i budownictwa podziemnego",
+    "sameAs": [],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "ul. Górnicza 123",
+      "addressLocality": "Katowice",
+      "postalCode": "00-000",
+      "addressCountry": "PL"
+    },
+    "telephone": "+48123456789",
+    "email": "kontakt@volbet.pl"
+  })} />
+</Layout>
+
+<style define:vars={{ navyBlue, orange, lightGray, mediumGray, white }}>
+  /* Hero Section */
+  .hero-section {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-content {
+    z-index: 2;
+  }
+
+  .hero-content h1 {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .hero-subheadline {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    max-width: 600px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .trust-badges {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .trust-icon {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    position: relative;
+    height: 500px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  /* Services Section */
+  .services-section {
+    padding: 80px 40px;
+  }
+
+  .section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-heading {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  /* Stats Section */
+  .stats-section {
+    padding: 80px 40px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+  }
+
+  .stat-block {
+    text-align: center;
+  }
+
+  .stat-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .stat-number {
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  /* About Section */
+  .about-section {
+    padding: 80px 40px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .about-content h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .about-content p {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .about-image {
+    position: relative;
+    height: 500px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Case Studies Section */
+  .case-studies-section {
+    padding: 80px 40px;
+  }
+
+  .section-subheading {
+    font-size: 18px;
+    margin-bottom: 48px;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .project-card {
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .project-card:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+  }
+
+  .project-image-wrapper {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    background: #f3f4f6;
+  }
+
+  .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .project-card:hover .project-image {
+    transform: scale(1.1);
+  }
+
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .project-card:hover .project-overlay {
+    opacity: 1;
+  }
+
+  .project-overlay-text {
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .project-content {
+    padding: 24px;
+  }
+
+  .project-category {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 12px;
+  }
+
+  .project-card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .project-client {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .project-description {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* Certifications Section */
+  .certifications-section {
+    padding: 80px 40px;
+  }
+
+  .certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+
+  .cert-item {
+    text-align: center;
+  }
+
+  .cert-badge {
+    font-size: 64px;
+    margin-bottom: 16px;
+  }
+
+  /* Contact CTA Section */
+  .contact-cta-section {
+    padding: 80px 40px;
+  }
+
+  .cta-content {
+    text-align: center;
+  }
+
+  .cta-content h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .cta-subheadline {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .contact-info {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+
+  .contact-link:hover {
+    opacity: 0.8;
+  }
+
+  .mt-8 {
+    margin-top: 32px;
+  }
+
+  .mt-12 {
+    margin-top: 48px;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  /* Responsive: Tablet */
+  @media (max-width: 1024px) {
+    .hero-section {
+      min-height: 70vh;
+    }
+
+    .hero-container {
+      grid-template-columns: 1fr;
+      padding: 60px 32px;
+      gap: 40px;
+    }
+
+    .hero-content h1 {
+      font-size: 32px;
+    }
+
+    .hero-subheadline {
+      font-size: 18px;
+    }
+
+    .hero-visual {
+      height: 400px;
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 32px;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .about-image {
+      height: 400px;
+    }
+
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .certifications-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta-buttons :global(a),
+    .cta-buttons :global(button) {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .section-heading {
+      font-size: 28px;
+    }
+  }
+
+  /* Responsive: Mobile */
+  @media (max-width: 768px) {
+    .hero-section {
+      min-height: auto;
+    }
+
+    .hero-container {
+      grid-template-columns: 1fr;
+      padding: 40px 16px;
+      gap: 32px;
+    }
+
+    .hero-content h1 {
+      font-size: 28px;
+      line-height: 1.3;
+    }
+
+    .hero-subheadline {
+      font-size: 16px;
+      margin-bottom: 24px;
+    }
+
+    .hero-ctas {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-ctas :global(a),
+    .hero-ctas :global(button) {
+      width: 100%;
+    }
+
+    .trust-badges {
+      gap: 16px;
+      flex-direction: column;
+    }
+
+    .hero-visual {
+      height: 300px;
+    }
+
+    .services-section {
+      padding: 60px 16px;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .stats-section {
+      padding: 60px 16px;
+    }
+
+    .stat-icon {
+      font-size: 40px;
+    }
+
+    .stat-number {
+      font-size: 40px;
+    }
+
+    .about-section {
+      padding: 60px 16px;
+    }
+
+    .about-content h2 {
+      font-size: 24px;
+    }
+
+    .about-content p {
+      font-size: 16px;
+    }
+
+    .about-image {
+      height: 300px;
+    }
+
+    .case-studies-section {
+      padding: 60px 16px;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .certifications-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .cert-badge {
+      font-size: 48px;
+    }
+
+    .contact-cta-section {
+      padding: 60px 16px;
+    }
+
+    .cta-content h2 {
+      font-size: 24px;
+    }
+
+    .cta-subheadline {
+      font-size: 16px;
+    }
+
+    .contact-info {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .section-heading {
+      font-size: 24px;
+      margin-bottom: 32px;
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Focus states for keyboard navigation */
+  a:focus,
+  button:focus {
+    outline: 2px solid var(--orange);
+    outline-offset: 2px;
+  }
+</style>

@@ -1,0 +1,105 @@
+---
+/**
+ * Button Component
+ * 
+ * A versatile button component supporting multiple variants and sizes.
+ * 
+ * @component
+ * @example
+ * <Button variant="primary">Click me</Button>
+ * <Button variant="secondary" href="/services">Learn More</Button>
+ * <Button variant="tertiary" size="large">Explore</Button>
+ */
+
+export interface Props {
+  /**
+   * Visual style variant
+   * - primary: Orange background, white text (main CTAs)
+   * - secondary: Orange border, orange text (secondary actions)
+   * - tertiary: Text only, orange (minimal style)
+   */
+  variant?: 'primary' | 'secondary' | 'tertiary';
+  
+  /**
+   * Optional href to render as anchor tag instead of button
+   */
+  href?: string;
+  
+  /**
+   * Button size
+   * - default: 12px vertical, 24px horizontal padding
+   * - large: 16px vertical, 32px horizontal padding
+   */
+  size?: 'default' | 'large';
+  
+  /**
+   * Additional CSS classes to merge
+   */
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  href,
+  size = 'default',
+  class: additionalClasses = '',
+} = Astro.props;
+
+// Base styles
+const baseClasses = 'inline-flex items-center justify-center font-semibold text-base rounded-md transition-colors duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2';
+
+// Variant styles
+const variantStyles = {
+  primary: 'bg-orange text-white hover:bg-orange-600 focus:ring-orange',
+  secondary: 'border-2 border-orange text-orange hover:bg-orange hover:text-white focus:ring-orange',
+  tertiary: 'text-orange hover:underline focus:ring-orange',
+};
+
+// Size styles
+const sizeStyles = {
+  default: 'px-6 py-3',
+  large: 'px-8 py-4',
+};
+
+const buttonClasses = `${baseClasses} ${variantStyles[variant]} ${sizeStyles[size]} ${additionalClasses}`.trim();
+
+// Orange color references from design system
+const orangeColor = '#D97706';
+const orangeDark = '#B45309';
+---
+
+{href ? (
+  <a href={href} class={buttonClasses}>
+    <slot />
+  </a>
+) : (
+  <button class={buttonClasses}>
+    <slot />
+  </button>
+)}
+
+<style define:vars={{ orangeColor, orangeDark }}>
+  .bg-orange {
+    background-color: var(--orangeColor);
+  }
+  
+  .hover\:bg-orange:hover {
+    background-color: var(--orangeColor);
+  }
+  
+  .hover\:bg-orange-600:hover {
+    background-color: var(--orangeDark);
+  }
+  
+  .border-orange {
+    border-color: var(--orangeColor);
+  }
+  
+  .text-orange {
+    color: var(--orangeColor);
+  }
+  
+  .focus\:ring-orange:focus {
+    --tw-ring-color: var(--orangeColor);
+  }
+</style>

@@ -1,0 +1,415 @@
+---
+/**
+ * Footer Component
+ * 
+ * Full-width footer with company info, navigation links, contact info, and newsletter signup.
+ * Responsive 3-column (desktop) to stacked (mobile) layout.
+ * 
+ * @component
+ * @example
+ * <Footer 
+ *   companyName="VOLBET"
+ *   companyDescription="Leading supplier of mining materials"
+ *   address="Ul. Górnicza 123, 40-001 Katowice"
+ *   email="info@volbet.pl"
+ *   phone="+48 32 123 4567"
+ * />
+ */
+
+export interface FooterLink {
+  label: string;
+  href: string;
+}
+
+export interface Props {
+  /**
+   * Company name for branding
+   */
+  companyName?: string;
+  
+  /**
+   * Short company description
+   */
+  companyDescription?: string;
+  
+  /**
+   * Company address
+   */
+  address?: string;
+  
+  /**
+   * Contact email
+   */
+  email?: string;
+  
+  /**
+   * Contact phone number
+   */
+  phone?: string;
+  
+  /**
+   * Social media links (array of objects with label and href)
+   */
+  socialLinks?: FooterLink[];
+  
+  /**
+   * Quick navigation links (array of objects with label and href)
+   */
+  quickLinks?: FooterLink[];
+  
+  /**
+   * Service links (array of objects with label and href)
+   */
+  serviceLinks?: FooterLink[];
+  
+  /**
+   * Copyright text
+   */
+  copyrightText?: string;
+  
+  /**
+   * Show newsletter signup form
+   */
+  showNewsletter?: boolean;
+  
+  /**
+   * Additional CSS classes
+   */
+  class?: string;
+}
+
+const {
+  companyName = 'VOLBET',
+  companyDescription = 'Professional mining and construction materials supplier.',
+  address = 'Katowice, Poland',
+  email = 'info@volbet.pl',
+  phone = '+48 32 XXX XXXX',
+  socialLinks = [
+    { label: 'LinkedIn', href: '#' },
+    { label: 'Facebook', href: '#' },
+  ],
+  quickLinks = [
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+  ],
+  serviceLinks = [
+    { label: 'Spoiwa Mineralne', href: '/services/spoiwa' },
+    { label: 'Torkretowanie', href: '/services/torkretowanie' },
+    { label: 'Termoizolacja', href: '/services/termoizolacja' },
+  ],
+  copyrightText = `© ${new Date().getFullYear()} ${companyName}. All rights reserved.`,
+  showNewsletter = true,
+  class: additionalClasses = '',
+} = Astro.props;
+
+// Design system colors
+const navyBlue = '#1A2332';
+const mediumGray = '#475569';
+const orangeColor = '#D97706';
+const lightGray = '#F8FAFC';
+const white = '#FFFFFF';
+const darkGray = '#1f2937';
+---
+
+<footer class={`footer ${additionalClasses}`.trim()} style={`background-color: ${darkGray}; color: ${white}`}>
+  <div class="footer-container">
+    {/* Main Footer Content */}
+    <div class="footer-content">
+      {/* Column 1: Company Info */}
+      <div class="footer-column">
+        <h3 class="footer-column-title" style={`color: ${white}`}>
+          {companyName}
+        </h3>
+        <p class="footer-description" style={`color: #d1d5db`}>
+          {companyDescription}
+        </p>
+        
+        {/* Contact Info */}
+        <div class="footer-contact">
+          {address && (
+            <p class="footer-contact-item" style={`color: #d1d5db`}>
+              📍 {address}
+            </p>
+          )}
+          {email && (
+            <p class="footer-contact-item" style={`color: #d1d5db`}>
+              <a href={`mailto:${email}`} class="footer-link" style={`color: ${orangeColor}`}>
+                ✉️ {email}
+              </a>
+            </p>
+          )}
+          {phone && (
+            <p class="footer-contact-item" style={`color: #d1d5db`}>
+              <a href={`tel:${phone}`} class="footer-link" style={`color: ${orangeColor}`}>
+                ☎️ {phone}
+              </a>
+            </p>
+          )}
+        </div>
+        
+        {/* Social Links */}
+        {socialLinks.length > 0 && (
+          <div class="footer-social">
+            {socialLinks.map((link) => (
+              <a 
+                href={link.href} 
+                class="footer-social-link"
+                style={`color: ${orangeColor}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+      
+      {/* Column 2: Quick Links */}
+      {quickLinks.length > 0 && (
+        <div class="footer-column">
+          <h4 class="footer-column-title" style={`color: ${white}`}>
+            Quick Links
+          </h4>
+          <ul class="footer-links-list">
+            {quickLinks.map((link) => (
+              <li class="footer-link-item">
+                <a href={link.href} class="footer-link" style={`color: #d1d5db`}>
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      
+      {/* Column 3: Services */}
+      {serviceLinks.length > 0 && (
+        <div class="footer-column">
+          <h4 class="footer-column-title" style={`color: ${white}`}>
+            Services
+          </h4>
+          <ul class="footer-links-list">
+            {serviceLinks.map((link) => (
+              <li class="footer-link-item">
+                <a href={link.href} class="footer-link" style={`color: #d1d5db`}>
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+    
+    {/* Newsletter Signup (Optional) */}
+    {showNewsletter && (
+      <div class="footer-newsletter">
+        <h4 class="footer-newsletter-title" style={`color: ${white}`}>
+          Stay Updated
+        </h4>
+        <p style={`color: #d1d5db; margin-bottom: 1rem; font-size: 0.9rem`}>
+          Subscribe to our newsletter for industry insights and updates.
+        </p>
+        <form class="footer-newsletter-form" method="POST">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+            class="footer-newsletter-input"
+            style={`
+              background-color: ${white};
+              color: ${navyBlue};
+              border: none;
+              padding: 0.75rem 1rem;
+              border-radius: 0.375rem;
+              font-size: 0.95rem;
+            `}
+          />
+          <button
+            type="submit"
+            class="footer-newsletter-button"
+            style={`
+              background-color: ${orangeColor};
+              color: ${white};
+              border: none;
+              padding: 0.75rem 1.5rem;
+              border-radius: 0.375rem;
+              font-weight: 600;
+              cursor: pointer;
+              transition: all 0.2s ease-in-out;
+            `}
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
+    )}
+  </div>
+  
+  {/* Footer Bottom */}
+  <div class="footer-bottom" style={`
+    border-top: 1px solid #374151;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    color: #9ca3af;
+    font-size: 0.9rem;
+  `}>
+    <p>{copyrightText}</p>
+  </div>
+</footer>
+
+<style define:vars={{
+  navyBlue,
+  mediumGray,
+  orangeColor,
+  lightGray,
+  white,
+  darkGray
+}}>
+  .footer {
+    margin-top: 4rem;
+  }
+  
+  .footer-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+  }
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .footer-content {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer-column-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.02em;
+  }
+  
+  .footer-description {
+    margin: 0 0 1.5rem 0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+  
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  
+  .footer-contact-item {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  .footer-link {
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .footer-link:hover {
+    text-decoration: underline;
+  }
+  
+  .footer-social {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .footer-social-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .footer-social-link:hover {
+    text-decoration: underline;
+  }
+  
+  .footer-links-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .footer-link-item {
+    font-size: 0.95rem;
+  }
+  
+  /* Newsletter */
+  .footer-newsletter {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    grid-column: 1 / -1;
+    margin-top: 2rem;
+  }
+  
+  .footer-newsletter-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+  
+  .footer-newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+  }
+  
+  @media (min-width: 640px) {
+    .footer-newsletter-form {
+      flex-direction: row;
+    }
+  }
+  
+  .footer-newsletter-input {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .footer-newsletter-input::placeholder {
+    color: #9ca3af;
+  }
+  
+  .footer-newsletter-button {
+    white-space: nowrap;
+    font-size: 0.95rem;
+  }
+  
+  .footer-newsletter-button:hover {
+    opacity: 0.9;
+  }
+  
+  .footer-bottom {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+</style>
